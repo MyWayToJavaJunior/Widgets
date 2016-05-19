@@ -65,7 +65,7 @@ public class CountdownWidgetProvider extends AppWidgetProvider {
         configIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
 
         configIntent.setData(Uri.parse("CONFIGURE_THE_WIDGET://widget/id" + appWidgetId));
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, configIntent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, configIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.root, pendingIntent);
 
         return views;
