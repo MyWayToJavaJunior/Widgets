@@ -18,7 +18,10 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.RemoteViews;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class CountdownWidgetProvider extends AppWidgetProvider {
 
@@ -38,9 +41,7 @@ public class CountdownWidgetProvider extends AppWidgetProvider {
         final int textColorGreyScale = appWidget.getTextColor();
         final int textColor = Color.rgb(textColorGreyScale, textColorGreyScale, textColorGreyScale);
 
-        Calendar current = Calendar.getInstance();
-        current.setTimeInMillis(System.currentTimeMillis());
-
+        Calendar current = Calendar.getInstance(Locale.getDefault());
         String diff = diffInString(current, countdown.date, showDays, showHours, showMinutes, useCapitals);
 
         SpannableString ss = new SpannableString(diff);
@@ -81,7 +82,7 @@ public class CountdownWidgetProvider extends AppWidgetProvider {
             negative = true;
         }
 
-        Calendar diff = Calendar.getInstance();
+        Calendar diff = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         diff.setTimeInMillis(diffInMillis);
 
         int YEARS = diff.get(Calendar.YEAR) - 1970;
